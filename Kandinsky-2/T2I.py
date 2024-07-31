@@ -28,7 +28,7 @@ def save_t2i(text,path):
 
 if __name__ == '__main__':
     # display(images[0])
-    save_t2i('laugh man','/home/whm/lhl/open/Kandinsky-2-main/new/t2i')
+    save_t2i('laugh man','./new/t2i')
 
 
 
