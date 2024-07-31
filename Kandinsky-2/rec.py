@@ -32,5 +32,5 @@ def save_inpainting(text,repath,topath):
 
 
 if __name__ == '__main__':
-    save_inpainting('证件照','./re.jpg','/home/whm/lhl/open/Kandinsky-2-main/new/rec')
+    save_inpainting('证件照','./re.jpg','./new/rec')
 
