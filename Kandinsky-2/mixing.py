@@ -30,4 +30,4 @@ def save_mix(text1,text2,path):
 
 
 if __name__ == '__main__':
-    save_mix('sad man','lion','/home/whm/lhl/open/Kandinsky-2-main/new/mix')
+    save_mix('sad man','lion','./new/mix')
