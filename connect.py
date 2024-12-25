@@ -65,14 +65,3 @@ class RemoteServerConnection:
             QMessageBox.information(None, "测试连接", "连接测试成功！")
         except Exception as e:
             self.show_error_message(f"连接测试失败: {str(e)}")
-
-# 额外的功能示例
-def additional_functionality():
-    """示例额外功能"""
-    print("执行额外功能")
-
-if __name__ == "__main__":
-    # test
-    connection = RemoteServerConnection("192.168.1.1", "user", "password")
-    connection.connect()
-    connection.disconnect() 
