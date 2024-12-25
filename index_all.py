@@ -40,13 +40,6 @@ class TexImagenKandinsky(QMainWindow):
         self.exit_button.setStyleSheet(self.get_button_style())
         self.exit_button.clicked.connect(self.close)
 
-        # 设置按钮
-        self.settings_button = QPushButton("设置", self.top_bar)
-        self.settings_button.setMinimumWidth(100)
-        self.settings_button.setFixedHeight(50)
-        self.settings_button.setStyleSheet(self.get_button_style())
-        self.settings_button.clicked.connect(self.do_nothing)
-
         # 帮助按钮
         self.help_button = QPushButton("帮助", self.top_bar)
         self.help_button.setMinimumWidth(100)
@@ -192,10 +185,6 @@ class TexImagenKandinsky(QMainWindow):
     def show_help_info(self):
         """显示帮助信息"""
         QMessageBox.information(self, "帮助", "<b>请联系邮箱: 1749057435@qq.com</b>", QMessageBox.Ok)
-
-    def do_nothing(self):
-        """设置按钮点击无反应"""
-        pass
 
     def show_connection_dialog(self):
         dialog = QDialog(self)
