@@ -54,11 +54,19 @@ class TexImagenKandinsky(QMainWindow):
         self.help_button.setStyleSheet(self.get_button_style())
         self.help_button.clicked.connect(self.show_help_info)
 
+        # 重置按钮
+        self.reset_button = QPushButton("重置", self.top_bar)
+        self.reset_button.setMinimumWidth(100)
+        self.reset_button.setFixedHeight(50)
+        self.reset_button.setStyleSheet(self.get_button_style())
+        self.reset_button.clicked.connect(self.reset_fields)
+
         # 将按钮添加到顶部布局
         self.top_bar_layout.addWidget(self.init_button)
         self.top_bar_layout.addWidget(self.exit_button)
         self.top_bar_layout.addWidget(self.settings_button)
         self.top_bar_layout.addWidget(self.help_button)
+        self.top_bar_layout.addWidget(self.reset_button)  # 添加重置按钮
         self.top_bar_layout.addStretch()
         main_layout.addWidget(self.top_bar)
 
@@ -473,6 +481,14 @@ class TexImagenKandinsky(QMainWindow):
         error_dialog.setText(message)
         error_dialog.setStandardButtons(QMessageBox.Ok)
         error_dialog.exec_()
+
+    def reset_fields(self):
+        """重置所有输入框和标签"""
+        self.textEdit_gen.clear()
+        self.pathLabel_gen.setText("未选择路径")
+        self.image_display_label.setPixmap(QPixmap())  # 清空显示的图像
+        self.progress_bar.setValue(0)  # 重置进度条
+        self.progress_bar.setVisible(False)  # 隐藏进度条
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
