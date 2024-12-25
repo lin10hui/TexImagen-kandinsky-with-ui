@@ -90,7 +90,7 @@ class TexImagenKandinsky(QMainWindow):
             self.nav_layout.addWidget(button)
             self.nav_buttons.append(button)
 
-        # 中左区域占 20%
+        # 中左区域
         middle_layout.addWidget(self.nav_widget, stretch=1)
 
         # 中左与中右之间的分隔线
