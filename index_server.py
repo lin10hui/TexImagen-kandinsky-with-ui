@@ -40,7 +40,6 @@ class TexImagenKandinsky(QMainWindow):
         self.exit_button.setStyleSheet(self.get_button_style())
         self.exit_button.clicked.connect(self.close)
 
-
         # 帮助按钮
         self.help_button = QPushButton("帮助", self.top_bar)
         self.help_button.setMinimumWidth(100)

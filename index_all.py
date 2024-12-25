@@ -186,7 +186,6 @@ class TexImagenKandinsky(QMainWindow):
         """显示帮助信息"""
         QMessageBox.information(self, "帮助", "<b>请联系邮箱: 1749057435@qq.com</b>", QMessageBox.Ok)
 
-
     def show_connection_dialog(self):
         dialog = QDialog(self)
         dialog.setWindowTitle("连接服务器")
