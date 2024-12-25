@@ -15,6 +15,7 @@
 a。直接执行不同文件：将文件放入解压好的文件夹内直接运行，init为初始化文件，首次使用需执行，T2I、mixing、rec分别为文本生成图像、图像融合和图像修复三个功能的调用代码，当然，如果你拥有jupyter的话直接运用作者的jupyter notebooks会更方便一些。    
 b.python实现ui界面：将文件放入解压好的文件夹外执行，运行index1.py文件（目录结构如下图所示）  
 ![image](https://github.com/user-attachments/assets/49e63e80-ea0d-443c-b00a-419515f2ec2f)    
+可直接下载本项目
 c.直接双击dist目录下的“TexImagenKandinsky.exe”文件即可运行    
 运行成功后即可正常使用其功能，第一次运行的需要额外进行**初始化**操作：在界面左上方点击初始化按钮即可。  
 **第二步：功能使用**  
