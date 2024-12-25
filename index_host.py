@@ -176,9 +176,6 @@ class TexImagenKandinsky(QMainWindow):
         """显示帮助信息"""
         QMessageBox.information(self, "帮助", "<b>请联系邮箱: 1749057435@qq.com</b>", QMessageBox.Ok)
 
-    def do_nothing(self):
-        """设置按钮点击无反应"""
-        pass
 
     def show_connection_dialog(self):
         dialog = QDialog(self)
