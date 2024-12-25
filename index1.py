@@ -1,7 +1,7 @@
 import sys
 from PyQt5 import QtWidgets, QtGui, QtCore
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QTextEdit, QMessageBox, QFrame, QRadioButton, QLineEdit, QDialog
-from PyQt5.QtGui import QPalette, QBrush
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QTextEdit, QMessageBox, QFrame, QRadioButton, QLineEdit, QDialog, QProgressBar
+from PyQt5.QtGui import QPalette, QBrush, QPixmap
 import subprocess
 from connect import RemoteServerConnection
 
@@ -90,7 +90,7 @@ class TexImagenKandinsky(QMainWindow):
             self.nav_layout.addWidget(button)
             self.nav_buttons.append(button)
 
-        # 中左区域
+        # 中左区域占 20%
         middle_layout.addWidget(self.nav_widget, stretch=1)
 
         # 中左与中右之间的分隔线
@@ -105,6 +105,24 @@ class TexImagenKandinsky(QMainWindow):
 
         # 初始化页面
         self.initUI()
+
+        # 中右部分用于显示生成的图像
+        self.image_display_label = QLabel("生成的图像将显示在这里", self)
+        self.image_display_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.image_display_label.setFixedSize(400, 400)  # 设置固定大小
+        self.image_display_label.setStyleSheet("border: 1px solid black;")  # 添加边框
+        self.stackedWidget.addWidget(self.image_display_label)
+
+        # 添加进度条
+        self.progress_bar = QProgressBar(self)
+        self.progress_bar.setRange(0, 100)
+        self.progress_bar.setTextVisible(True)
+        self.progress_bar.setValue(0)
+        self.progress_bar.setVisible(False)  # 初始隐藏
+        main_layout.addWidget(self.progress_bar)
+
+        # 图像修复部分
+        self.setup_inpainting_page()
 
         # 中部与底部的分隔线
         separation_line_bottom = QFrame(self)
@@ -128,10 +146,6 @@ class TexImagenKandinsky(QMainWindow):
         self.connect_button.clicked.connect(self.show_connection_dialog)
         self.bottom_layout.addWidget(self.connect_button)
 
-        # 设置顶部和底部的高度
-        self.top_bar.setFixedHeight(70)
-        self.bottom_layout.setSpacing(20)
-
     def set_background(self):
         """设置背景图片自适应铺满整个窗口"""
         palette = self.palette()
@@ -141,15 +155,15 @@ class TexImagenKandinsky(QMainWindow):
     def get_button_style(self):
         return """
             QPushButton {
-                background-color: rgba(255, 255, 255, 0.8);
+                background-color: rgba(255, 255, 255, 0.8);  /* 半透明白色 */
                 border-radius: 10px; 
                 padding: 5px;
             }
             QPushButton:hover {
-                background-color: rgba(200, 200, 200, 0.8);
+                background-color: rgba(200, 200, 200, 0.8);  /* 半透明灰色 */
             }
             QPushButton:disabled {
-                background-color: rgba(150, 150, 150, 0.8);
+                background-color: rgba(150, 150, 150, 0.8);  /* 半透明深灰色 */
             }
         """
 
@@ -169,26 +183,7 @@ class TexImagenKandinsky(QMainWindow):
 
     def show_help_info(self):
         """显示帮助信息"""
-        help_dialog = QDialog(self)
-        help_dialog.setWindowTitle("帮助")
-        help_dialog.setGeometry(100, 100, 400, 200)
-
-        layout = QVBoxLayout(help_dialog)
-
-        help_label = QLabel("<b>请联系邮箱: 1749057435@qq.com</b>", help_dialog)
-        layout.addWidget(help_label)
-
-        copy_button = QPushButton("复制邮箱", help_dialog)
-        copy_button.clicked.connect(self.copy_email_to_clipboard)
-        layout.addWidget(copy_button)
-
-        help_dialog.exec_()
-
-    def copy_email_to_clipboard(self):
-        """复制邮箱到剪切板"""
-        clipboard = QtWidgets.QApplication.clipboard()
-        clipboard.setText("1749057435@qq.com")
-        QMessageBox.information(self, "复制成功", "邮箱已复制到剪切板！")
+        QMessageBox.information(self, "帮助", "<b>请联系邮箱: 1749057435@qq.com</b>", QMessageBox.Ok)
 
     def do_nothing(self):
         """设置按钮点击无反应"""
@@ -317,15 +312,42 @@ class TexImagenKandinsky(QMainWindow):
         if not path:
             self.show_error_message("请选择文件保存位置")
             return
+
+        self.progress_bar.setVisible(True)  # 显示进度条
+        self.progress_bar.setValue(0)  # 重置进度条
+
         if self.server_run_radio.isChecked():
             command = f"python Kandinsky-2-main/T2I.py '{text}' '{path}'"
-            stdout, stderr = self.remote_connection.execute_command(command)
-            if stderr:
-                self.show_error_message(f"错误: {stderr}")
-            else:
-                QMessageBox.information(self, "成功", "图像生成成功！")
+            self.execute_command_with_progress(command)
         else:
             subprocess.run(["python", "Kandinsky-2-main/T2I.py", text, path])
+            self.display_generated_image(path)  # 显示生成的图像
+
+    def execute_command_with_progress(self, command):
+        """执行命令并更新进度条"""
+        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        while True:
+            output = process.stdout.readline()
+            if output == b"" and process.poll() is not None:
+                break
+            if output:
+                # 假设输出中包含进度信息
+                # 这里可以解析输出以更新进度条
+                # 例如：假设输出格式为 "Progress: 50%"
+                if b"Progress:" in output:
+                    progress_value = int(output.split(b":")[1].strip().replace(b"%", b""))
+                    self.progress_bar.setValue(progress_value)
+
+        process.wait()  # 等待进程结束
+        self.progress_bar.setValue(100)  # 完成时设置为100%
+        QMessageBox.information(self, "成功", "图像生成成功！")
+        self.display_generated_image(self.save_path_gen)  # 显示生成的图像
+
+    def display_generated_image(self, image_path):
+        """在界面中显示生成的图像"""
+        pixmap = QPixmap(image_path)
+        self.image_display_label.setPixmap(pixmap.scaled(self.image_display_label.size(), QtCore.Qt.KeepAspectRatio))
 
     def setup_mixing_page(self):
         layout = QVBoxLayout(self.page_mixing)
@@ -445,8 +467,7 @@ class TexImagenKandinsky(QMainWindow):
             subprocess.run(["python", "Kandinsky-2-main/rec.py", text, repair_path, save_path])
 
     def show_error_message(self, message):
-        """显示错误信息对话框"""
-        error_dialog = QMessageBox()
+        error_dialog = QMessageBox(self)
         error_dialog.setIcon(QMessageBox.Critical)
         error_dialog.setWindowTitle("错误")
         error_dialog.setText(message)
