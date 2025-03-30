@@ -15,7 +15,8 @@ class RemoteServerConnection:
         """连接到远程服务器"""
         try:
             self.client = paramiko.SSHClient()
-            self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            self.client.load_system_host_keys()
+            self.client.set_missing_host_key_policy(paramiko.RejectPolicy())
             self.client.connect(self.ip, username=self.username, password=self.password)
             self.is_connected = True
             print("连接成功")
@@ -34,10 +35,18 @@ class RemoteServerConnection:
     def execute_command(self, command):
         """在远程服务器上执行命令"""
         if self.client:
+            if not self.is_command_safe(command):
+                self.show_error_message("不安全的命令")
+                return "", "不安全的命令"
             stdin, stdout, stderr = self.client.exec_command(command)
             return stdout.read().decode(), stderr.read().decode()
         else:
             self.show_error_message("未连接到服务器")
+
+    def is_command_safe(self, command):
+
+        dangerous_commands = ['rm', 'shutdown', 'reboot', 'mkfs', 'dd']
+        return not any(dangerous_command in command for dangerous_command in dangerous_commands)
 
     def upload_file(self, local_path, remote_path):
         """上传文件到远程服务器"""
@@ -143,10 +152,7 @@ class RemoteServerConnection:
         else:
             self.show_error_message("未连接到服务器")
 
-# 额外的功能示例
-def additional_functionality():
-    """示例额外功能"""
-    print("执行额外功能")
+
 
 if __name__ == "__main__":
     # 示例用法

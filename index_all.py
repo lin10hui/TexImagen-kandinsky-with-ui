@@ -356,7 +356,7 @@ class TexImagenKandinsky(QMainWindow):
 
     def execute_command_with_progress(self, command):
         """执行命令并更新进度条"""
-        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         while True:
             output = process.stdout.readline()

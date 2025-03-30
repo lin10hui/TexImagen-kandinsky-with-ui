@@ -2,6 +2,7 @@ import sys
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QTextEdit, QMessageBox, QFrame, QRadioButton, QLineEdit, QDialog
 import subprocess
+import os
 from connect import RemoteServerConnection
 
 class TexImagenKandinsky(QMainWindow):
@@ -200,7 +201,17 @@ class TexImagenKandinsky(QMainWindow):
             else:
                 QMessageBox.information(self, "成功", "初始化成功！")
         else:
-            subprocess.run(["python", "Kandinsky-2-main/init.py"])
+            self.run_command(["python", "Kandinsky-2-main/init.py"])
+
+    def run_command(self, command):
+        """执行命令"""
+        # 确保使用完整路径
+        full_command = [os.path.abspath(cmd) if i == 0 else cmd for i, cmd in enumerate(command)]
+        try:
+            result = subprocess.run(full_command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            return result.stdout.decode(), result.stderr.decode()
+        except subprocess.CalledProcessError as e:
+            return "", str(e)
 
     def setup_generation_page(self):
         layout = QVBoxLayout(self.page_generation)
@@ -245,7 +256,7 @@ class TexImagenKandinsky(QMainWindow):
             else:
                 QMessageBox.information(self, "成功", "图像生成成功！")
         else:
-            subprocess.run(["python", "Kandinsky-2-main/T2I.py", text, path])
+            self.run_command(["python", "Kandinsky-2-main/T2I.py", text, path])
 
     def setup_mixing_page(self):
         layout = QVBoxLayout(self.page_mixing)
@@ -302,7 +313,7 @@ class TexImagenKandinsky(QMainWindow):
             else:
                 QMessageBox.information(self, "成功", "图像混合成功！")
         else:
-            subprocess.run(["python", "Kandinsky-2-main/mixing.py", text1, text2, path])
+            self.run_command(["python", "Kandinsky-2-main/mixing.py", text1, text2, path])
 
     def setup_inpainting_page(self):
         layout = QVBoxLayout(self.page_inpainting)
@@ -362,7 +373,7 @@ class TexImagenKandinsky(QMainWindow):
             else:
                 QMessageBox.information(self, "成功", "图像修复成功！")
         else:
-            subprocess.run(["python", "Kandinsky-2-main/rec.py", text, repair_path, save_path])
+            self.run_command(["python", "Kandinsky-2-main/rec.py", text, repair_path, save_path])
 
     def show_error_message(self, message):
         error_dialog = QMessageBox(self)
@@ -371,7 +382,6 @@ class TexImagenKandinsky(QMainWindow):
         error_dialog.setText(message)
         error_dialog.setStandardButtons(QMessageBox.Ok)
         error_dialog.exec_()
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
