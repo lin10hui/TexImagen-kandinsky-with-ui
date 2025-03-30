@@ -1,6 +1,3 @@
-![image](https://github.com/user-attachments/assets/c8e47ef4-7f49-4498-b47c-a0bfc0436085)# TexImagen-kandinsky-with-ui
-具有文本到图像（Text-to-Image, T2I）、修复（Restoration）和图像融合（Image Fusion）三大功能的图形化程序
-
 # 简介
 本项目基于[Kandinsky 2.1](https://github.com/ai-forever/Kandinsky-2?tab=readme-ov-file)模型，使用python语言设计并编写一个独立、具备用户交互功能的图形化程序，旨在实现以下三个功能：  
 1.文本生成图像（Text-to-Image, T2I）；  
