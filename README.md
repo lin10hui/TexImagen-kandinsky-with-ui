@@ -1,4 +1,4 @@
-# TexImagen-kandinsky-with-ui
+![image](https://github.com/user-attachments/assets/c8e47ef4-7f49-4498-b47c-a0bfc0436085)# TexImagen-kandinsky-with-ui
 具有文本到图像（Text-to-Image, T2I）、修复（Restoration）和图像融合（Image Fusion）三大功能的图形化程序
 
 # 简介
@@ -29,6 +29,22 @@ c.直接双击dist目录下的“.exe”后缀文件
 2.点击图像生成、图像融合和图像修复三个按钮会显示不同的页面，输入图像描述并选择图像保存路径后点击生成按钮即可。  
 如果在使用过程中遇到问题可点击“帮助”按钮联系我。  
 
+**详细介绍**  
+1.	文本生成图像（Text-to-Image, T2I）：  
+ ![image](https://github.com/lin10hui/TexImagen-kandinsky-with-ui/blob/main/img/1.png)  
+2.	图像修复（Inpainting）；  
+ ![image](https://github.com/lin10hui/TexImagen-kandinsky-with-ui/blob/main/img/2.png)  
+3.图像融合（Image Fusion）。  
+ ![image](https://github.com/lin10hui/TexImagen-kandinsky-with-ui/blob/main/img/3.png)  
+	并且本程序包含三个版本：远程服务器端、本地端、完整版，同时满足远程使用与本地使用的需求，并且用户可点击“.exe”后缀文件直接使用。  
+远程服务器端：  
+ ![image](https://github.com/lin10hui/TexImagen-kandinsky-with-ui/blob/main/img/remote.png)  
+本地端：  
+ ![image](https://github.com/lin10hui/TexImagen-kandinsky-with-ui/blob/main/img/host.png)  
+完整版：  
+ ![image](https://github.com/lin10hui/TexImagen-kandinsky-with-ui/blob/main/img/all.png)  
+其余配套功能：  
+![image](https://github.com/lin10hui/TexImagen-kandinsky-with-ui/blob/main/img/other.png)  
 ## 贡献者欢迎  
   
 嗨！非常感谢你查看这个项目。作为一个新手小白，我深知自己在编程和项目管理上还有很多需要学习的地方。因此，我非常欢迎和感激任何形式的贡献，无论是修复一个小的bug、优化代码性能、改善文档，还是提出建设性的意见和建议。  
