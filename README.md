@@ -38,6 +38,6 @@ c.直接双击dist目录下的“TexImagenKandinsky.exe”文件即可运行
 1.上传了4个文件用于初始化和调用Kandinsky 2.1模型，可以在[下载](https://github.com/ai-forever/Kandinsky-2?tab=readme-ov-file)的基础上将文件放入解压好的文件夹内直接运行，init为初始化文件，首次使用需执行，T2I、mixing、rec分别为文本生成图像、图像融合和图像修复三个功能的调用代码，当然，如果你拥有jupyter的话直接运用作者的jupyter notebooks会更方便一些，这些文件的设计仅为后续在ui界面中调用使用。  
 2.上传了ui界面的第一个版本，实现了图像生成功能的界面。  
 3.上传了完整的ui界面文件index1.py，可以在本地通过运行该文件，实现文本生成图像、图像融合和图像修复三个功能。  
-4.上传了可执行文件“TexImagenKandinsky.exe”
-5.更改了完整版无法运行的bug
-6.增加了自定义背景功能
+4.上传了可执行文件“TexImagenKandinsky.exe”  
+5.更改了完整版无法运行的bug  
+6.增加了自定义背景功能  
