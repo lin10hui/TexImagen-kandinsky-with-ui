@@ -47,6 +47,13 @@ class TexImagenKandinsky(QMainWindow):
         self.help_button.setStyleSheet(self.get_button_style())
         self.help_button.clicked.connect(self.show_help_info)
 
+        # 设置按钮
+        self.settings_button = QPushButton("自定义背景图片", self.top_bar)
+        self.settings_button.setMinimumWidth(100)
+        self.settings_button.setFixedHeight(50)
+        self.settings_button.setStyleSheet(self.get_button_style())
+        self.settings_button.clicked.connect(self.settings)
+
         # 重置按钮
         self.reset_button = QPushButton("重置", self.top_bar)
         self.reset_button.setMinimumWidth(100)
@@ -138,7 +145,7 @@ class TexImagenKandinsky(QMainWindow):
         # 本地运行和服务器运行的单选按钮
         self.local_run_radio = QRadioButton("本地运行")
         self.server_run_radio = QRadioButton("服务器运行")
-        self.local_run_radio.setChecked(True)
+        self.local_run_radio.setChecked(True)  # 默认选择本地运行
         self.bottom_layout.addWidget(self.local_run_radio)
         self.bottom_layout.addWidget(self.server_run_radio)
 
@@ -146,6 +153,19 @@ class TexImagenKandinsky(QMainWindow):
         self.connect_button = QPushButton("连接服务器")
         self.connect_button.clicked.connect(self.show_connection_dialog)
         self.bottom_layout.addWidget(self.connect_button)
+
+        # 绑定单选按钮的状态变化事件
+        self.local_run_radio.toggled.connect(self.update_connect_button_state)
+
+        # 初始化连接按钮状态
+        self.update_connect_button_state()
+
+    def update_connect_button_state(self):
+        """根据单选按钮的状态更新连接服务器按钮的可用性"""
+        if self.local_run_radio.isChecked():
+            self.connect_button.setEnabled(False)  # 本地运行时禁用连接按钮
+        else:
+            self.connect_button.setEnabled(True)  # 服务器运行时启用连接按钮
 
     def set_background(self):
         """设置背景图片自适应铺满整个窗口"""
@@ -185,6 +205,20 @@ class TexImagenKandinsky(QMainWindow):
     def show_help_info(self):
         """显示帮助信息"""
         QMessageBox.information(self, "帮助", "<b>请联系邮箱: 1749057435@qq.com</b>", QMessageBox.Ok)
+
+    def settings(self):
+        """设置按钮点击后选择并应用自定义背景图片"""
+        options = QFileDialog.Options()
+        options |= QFileDialog.ReadOnly
+        file_name, _ = QFileDialog.getOpenFileName(self, "选择背景图片", "",
+                                                   "Images (*.png *.jpg *.jpeg *.bmp);;All Files (*)", options=options)
+        if file_name:
+            # 更新背景图片
+            palette = self.palette()
+            palette.setBrush(QPalette.Window, QBrush(
+                QtGui.QPixmap(file_name).scaled(self.size(), QtCore.Qt.IgnoreAspectRatio,
+                                                QtCore.Qt.SmoothTransformation)))
+            self.setPalette(palette)
 
     def show_connection_dialog(self):
         dialog = QDialog(self)
