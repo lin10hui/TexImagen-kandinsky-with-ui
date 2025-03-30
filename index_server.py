@@ -40,6 +40,13 @@ class TexImagenKandinsky(QMainWindow):
         self.exit_button.setStyleSheet(self.get_button_style())
         self.exit_button.clicked.connect(self.close)
 
+        # 设置按钮
+        self.settings_button = QPushButton("自定义背景图片", self.top_bar)
+        self.settings_button.setMinimumWidth(100)
+        self.settings_button.setFixedHeight(50)
+        self.settings_button.setStyleSheet(self.get_button_style())
+        self.settings_button.clicked.connect(self.settings)
+
         # 帮助按钮
         self.help_button = QPushButton("帮助", self.top_bar)
         self.help_button.setMinimumWidth(100)
@@ -178,6 +185,20 @@ class TexImagenKandinsky(QMainWindow):
     def show_help_info(self):
         """显示帮助信息"""
         QMessageBox.information(self, "帮助", "<b>请联系邮箱: 1749057435@qq.com</b>", QMessageBox.Ok)
+
+    def settings(self):
+        """设置按钮点击后选择并应用自定义背景图片"""
+        options = QFileDialog.Options()
+        options |= QFileDialog.ReadOnly
+        file_name, _ = QFileDialog.getOpenFileName(self, "选择背景图片", "",
+                                                   "Images (*.png *.jpg *.jpeg *.bmp);;All Files (*)", options=options)
+        if file_name:
+            # 更新背景图片
+            palette = self.palette()
+            palette.setBrush(QPalette.Window, QBrush(
+                QtGui.QPixmap(file_name).scaled(self.size(), QtCore.Qt.IgnoreAspectRatio,
+                                                QtCore.Qt.SmoothTransformation)))
+            self.setPalette(palette)
 
     def show_connection_dialog(self):
         dialog = QDialog(self)
