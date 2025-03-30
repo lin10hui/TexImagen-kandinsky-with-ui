@@ -39,6 +39,13 @@ class TexImagenKandinsky(QMainWindow):
         self.exit_button.setStyleSheet(self.get_button_style())
         self.exit_button.clicked.connect(self.close)
 
+        # 设置按钮
+        self.settings_button = QPushButton("自定义背景图片", self.top_bar)
+        self.settings_button.setMinimumWidth(100)
+        self.settings_button.setFixedHeight(50)
+        self.settings_button.setStyleSheet(self.get_button_style())
+        self.settings_button.clicked.connect(self.settings)
+
         # 帮助按钮
         self.help_button = QPushButton("帮助", self.top_bar)
         self.help_button.setMinimumWidth(100)
@@ -169,41 +176,19 @@ class TexImagenKandinsky(QMainWindow):
         """显示帮助信息"""
         QMessageBox.information(self, "帮助", "<b>请联系邮箱: 1749057435@qq.com</b>", QMessageBox.Ok)
 
-    def show_connection_dialog(self):
-        dialog = QDialog(self)
-        dialog.setWindowTitle("连接服务器")
-        dialog.setGeometry(100, 100, 300, 200)
-
-        layout = QVBoxLayout(dialog)
-
-        ip_label = QLabel("服务器 IP 地址:", dialog)
-        self.ip_input = QLineEdit(dialog)
-        self.ip_input.setStyleSheet("border-radius: 10px;")  # 圆角输入框
-        layout.addWidget(ip_label)
-        layout.addWidget(self.ip_input)
-
-        username_label = QLabel("用户名:", dialog)
-        self.username_input = QLineEdit(dialog)
-        self.username_input.setStyleSheet("border-radius: 10px;")  # 圆角输入框
-        layout.addWidget(username_label)
-        layout.addWidget(self.username_input)
-
-        password_label = QLabel("密码:", dialog)
-        self.password_input = QLineEdit(dialog)
-        self.password_input.setEchoMode(QLineEdit.Password)
-        self.password_input.setStyleSheet("border-radius: 10px;")  # 圆角输入框
-        layout.addWidget(password_label)
-        layout.addWidget(self.password_input)
-
-        test_button = QPushButton("测试连接", dialog)
-        test_button.clicked.connect(self.test_connection)
-        layout.addWidget(test_button)
-
-        confirm_button = QPushButton("确认", dialog)
-        confirm_button.clicked.connect(lambda: self.connect_to_server(dialog))
-        layout.addWidget(confirm_button)
-
-        dialog.exec_()
+    def settings(self):
+        """设置按钮点击后选择并应用自定义背景图片"""
+        options = QFileDialog.Options()
+        options |= QFileDialog.ReadOnly
+        file_name, _ = QFileDialog.getOpenFileName(self, "选择背景图片", "",
+                                                   "Images (*.png *.jpg *.jpeg *.bmp);;All Files (*)", options=options)
+        if file_name:
+            # 更新背景图片
+            palette = self.palette()
+            palette.setBrush(QPalette.Window, QBrush(
+                QtGui.QPixmap(file_name).scaled(self.size(), QtCore.Qt.IgnoreAspectRatio,
+                                                QtCore.Qt.SmoothTransformation)))
+            self.setPalette(palette)
 
     def update_button_states(self):
         for i, button in enumerate(self.nav_buttons):
