@@ -1,0 +1,351 @@
+Run started:2025-03-30 08:26:52.653164
+
+Test results:
+>> Issue: [B601:paramiko_calls] Possible shell injection via Paramiko call, check inputs are properly sanitized.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b601_paramiko_calls.html
+   Location: D:\桌面\开源\v1\last\test\connect.py:44:36
+43	                return "", "不安全的命令"
+44	            stdin, stdout, stderr = self.client.exec_command(command)
+45	            return stdout.read().decode(), stderr.read().decode()
+
+--------------------------------------------------
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: D:\桌面\开源\v1\last\test\index2.py:4:0
+3	from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QTextEdit, QMessageBox, QFrame, QRadioButton, QLineEdit, QDialog
+4	import subprocess
+5	import os
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index2.py:211:21
+210	        try:
+211	            result = subprocess.run(full_command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+212	            return result.stdout.decode(), result.stderr.decode()
+
+--------------------------------------------------
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: D:\桌面\开源\v1\last\test\index_all.py:5:0
+4	from PyQt5.QtGui import QPalette, QBrush, QPixmap
+5	import subprocess
+6	from connect import RemoteServerConnection
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b607_start_process_with_partial_path.html
+   Location: D:\桌面\开源\v1\last\test\index_all.py:309:12
+308	        else:
+309	            subprocess.run(["python", "Kandinsky-2-main/init.py"])
+310	
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_all.py:309:12
+308	        else:
+309	            subprocess.run(["python", "Kandinsky-2-main/init.py"])
+310	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b607_start_process_with_partial_path.html
+   Location: D:\桌面\开源\v1\last\test\index_all.py:354:12
+353	        else:
+354	            subprocess.run(["python", "Kandinsky-2-main/T2I.py", text, path])
+355	            self.display_generated_image(path)  # 显示生成的图像
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_all.py:354:12
+353	        else:
+354	            subprocess.run(["python", "Kandinsky-2-main/T2I.py", text, path])
+355	            self.display_generated_image(path)  # 显示生成的图像
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_all.py:359:18
+358	        """执行命令并更新进度条"""
+359	        process = subprocess.Popen(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+360	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b607_start_process_with_partial_path.html
+   Location: D:\桌面\开源\v1\last\test\index_all.py:438:12
+437	        else:
+438	            subprocess.run(["python", "Kandinsky-2-main/mixing.py", text1, text2, path])
+439	
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_all.py:438:12
+437	        else:
+438	            subprocess.run(["python", "Kandinsky-2-main/mixing.py", text1, text2, path])
+439	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b607_start_process_with_partial_path.html
+   Location: D:\桌面\开源\v1\last\test\index_all.py:498:12
+497	        else:
+498	            subprocess.run(["python", "Kandinsky-2-main/rec.py", text, repair_path, save_path])
+499	
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_all.py:498:12
+497	        else:
+498	            subprocess.run(["python", "Kandinsky-2-main/rec.py", text, repair_path, save_path])
+499	
+
+--------------------------------------------------
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: D:\桌面\开源\v1\last\test\index_host.py:5:0
+4	from PyQt5.QtGui import QPalette, QBrush, QPixmap
+5	import subprocess
+6	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b607_start_process_with_partial_path.html
+   Location: D:\桌面\开源\v1\last\test\index_host.py:221:12
+220	        else:
+221	            subprocess.run(["python", "Kandinsky-2-main/init.py"])
+222	
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_host.py:221:12
+220	        else:
+221	            subprocess.run(["python", "Kandinsky-2-main/init.py"])
+222	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b607_start_process_with_partial_path.html
+   Location: D:\桌面\开源\v1\last\test\index_host.py:266:12
+265	        else:
+266	            subprocess.run(["python", "Kandinsky-2-main/T2I.py", text, path])
+267	            self.display_generated_image(path)  # 显示生成的图像
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_host.py:266:12
+265	        else:
+266	            subprocess.run(["python", "Kandinsky-2-main/T2I.py", text, path])
+267	            self.display_generated_image(path)  # 显示生成的图像
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_host.py:271:18
+270	        """执行命令并更新进度条"""
+271	        process = subprocess.Popen(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+272	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b607_start_process_with_partial_path.html
+   Location: D:\桌面\开源\v1\last\test\index_host.py:350:12
+349	        else:
+350	            subprocess.run(["python", "Kandinsky-2-main/mixing.py", text1, text2, path])
+351	
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_host.py:350:12
+349	        else:
+350	            subprocess.run(["python", "Kandinsky-2-main/mixing.py", text1, text2, path])
+351	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b607_start_process_with_partial_path.html
+   Location: D:\桌面\开源\v1\last\test\index_host.py:410:12
+409	        else:
+410	            subprocess.run(["python", "Kandinsky-2-main/rec.py", text, repair_path, save_path])
+411	
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_host.py:410:12
+409	        else:
+410	            subprocess.run(["python", "Kandinsky-2-main/rec.py", text, repair_path, save_path])
+411	
+
+--------------------------------------------------
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: D:\桌面\开源\v1\last\test\index_server.py:5:0
+4	from PyQt5.QtGui import QPalette, QBrush, QPixmap
+5	import subprocess
+6	from connect import RemoteServerConnection
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b607_start_process_with_partial_path.html
+   Location: D:\桌面\开源\v1\last\test\index_server.py:289:12
+288	        else:
+289	            subprocess.run(["python", "Kandinsky-2-main/init.py"])
+290	
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_server.py:289:12
+288	        else:
+289	            subprocess.run(["python", "Kandinsky-2-main/init.py"])
+290	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b607_start_process_with_partial_path.html
+   Location: D:\桌面\开源\v1\last\test\index_server.py:334:12
+333	        else:
+334	            subprocess.run(["python", "Kandinsky-2-main/T2I.py", text, path])
+335	            self.display_generated_image(path)  # 显示生成的图像
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_server.py:334:12
+333	        else:
+334	            subprocess.run(["python", "Kandinsky-2-main/T2I.py", text, path])
+335	            self.display_generated_image(path)  # 显示生成的图像
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_server.py:339:18
+338	        """执行命令并更新进度条"""
+339	        process = subprocess.Popen(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+340	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b607_start_process_with_partial_path.html
+   Location: D:\桌面\开源\v1\last\test\index_server.py:418:12
+417	        else:
+418	            subprocess.run(["python", "Kandinsky-2-main/mixing.py", text1, text2, path])
+419	
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_server.py:418:12
+417	        else:
+418	            subprocess.run(["python", "Kandinsky-2-main/mixing.py", text1, text2, path])
+419	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b607_start_process_with_partial_path.html
+   Location: D:\桌面\开源\v1\last\test\index_server.py:478:12
+477	        else:
+478	            subprocess.run(["python", "Kandinsky-2-main/rec.py", text, repair_path, save_path])
+479	
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.3/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: D:\桌面\开源\v1\last\test\index_server.py:478:12
+477	        else:
+478	            subprocess.run(["python", "Kandinsky-2-main/rec.py", text, repair_path, save_path])
+479	
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 1594
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 32
+		Medium: 1
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 1
+		High: 32
+Files skipped (0):
