@@ -44,3 +44,5 @@ c.直接双击dist目录下的“.exe”后缀文件
 4.上传了可执行文件“TexImagenKandinsky.exe”  
 5.更改了完整版无法运行的bug  
 6.增加了自定义背景功能  
+7.上传了安全性检测报告report.json  
+
