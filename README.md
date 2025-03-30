@@ -11,14 +11,17 @@
 ## 操作指南  
 **第一步：初始化与执行**  
 1.使用下列命令在运行环境下载[Kandinsky 2.1](https://github.com/ai-forever/Kandinsky-2?tab=readme-ov-file)模型  
+方式一：  
 ```git clone https://github.com/ai-forever/Kandinsky-2.git  ```   
-也可直接下载本项目  
+方式二：  
+直接下载本项目中的Kandinsky-2-main文件夹，此文件夹经删减后仅包含Kandinsky 2.1模型。  
 2.调用方式有三种：  
-a。直接执行不同文件：将文件放入解压好的文件夹内直接运行，init为初始化文件，首次使用需执行，T2I、mixing、rec分别为文本生成图像、图像融合和图像修复三个功能的调用代码，当然，如果你拥有jupyter的话直接运用作者的jupyter notebooks会更方便一些。    
-b.python实现ui界面：将文件放入解压好的文件夹外执行，运行index1.py文件（目录结构如下图所示）  
+注：首次使用必须调用init文件或点击程序“初始化”按钮进行**初始化**。  
+a.直接执行不同文件：将文件放入解压好的文件夹内直接运行，init为初始化文件，首次使用需执行，T2I、mixing、rec分别为文本生成图像、图像融合和图像修复三个功能的调用代码，当然，如果你拥有jupyter的话直接运用作者的jupyter notebooks会更方便一些。    
+b.python实现ui界面：将文件放入解压好的文件夹外执行，运行index1.py文件【现应为index_xxx.py文件】（目录结构如下图所示）  
 ![image](https://github.com/user-attachments/assets/49e63e80-ea0d-443c-b00a-419515f2ec2f)    
-c.直接双击dist目录下的“TexImagenKandinsky.exe”文件即可运行    
-运行成功后即可正常使用其功能，第一次运行的需要额外进行**初始化**操作：在界面左上方点击初始化按钮即可。  
+c.直接双击dist目录下的“.exe”后缀文件  
+运行成功后即可正常使用其功能  
 **第二步：功能使用**  
 在界面底部可选择在本地运行或在远程服务器运行：  
 *若选择本地运行可跳过步骤1*  
@@ -41,3 +44,5 @@ c.直接双击dist目录下的“TexImagenKandinsky.exe”文件即可运行
 4.上传了可执行文件“TexImagenKandinsky.exe”  
 5.更改了完整版无法运行的bug  
 6.增加了自定义背景功能  
+7.上传了安全性检测报告report.json【使用bandit工具检测】  
+
